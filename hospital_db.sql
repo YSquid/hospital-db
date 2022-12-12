@@ -163,3 +163,20 @@ JOIN departments
 ON departments.id = doctors_departments.department_id
 ORDER BY 1;
 
+--ALTER rooms table to have an alias column
+ALTER TABLE rooms 
+ADD COLUMN alias VARCHAR(32)
+
+--UPDATE the room aliases
+UPDATE rooms
+SET alias = 'Emergency and Surgery Patients'
+WHERE id = 1;
+
+UPDATE rooms
+SET alias = 'L&D and Pediatrics Patients'
+WHERE id = 2;
+
+UPDATE rooms
+SET alias = 'ICU patients'
+WHERE id = 3;
+
