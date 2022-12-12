@@ -120,10 +120,46 @@ VALUES
 
 /*TESTING*/
 
---Which doctorss are assigned to which patients
-SELECT * from doctors
+--Which doctors are assigned to which patients
+SELECT
+    doctors.name_first AS doctor_first_name,
+    doctors.name_last AS doctor_last_name,
+    doctors_patients.doctor_id,
+    doctors_patients.patient_id,
+    patients.name_first AS patient_first_name,
+    patients.name_last AS patient_last_name
+FROM doctors
 JOIN doctors_patients
 ON doctors.id = doctors_patients.doctor_id
 JOIN patients
 ON patients.id = doctors_patients.patient_id
-ORDER BY doctors.id;
+ORDER BY 2;
+
+--Which patients are in which bed and room
+
+SELECT
+    patients.id,
+    patients.name_first AS patient_first_name,
+    patients.name_last AS patient_last_name,
+    beds.id AS bed_number,
+    beds.room_id AS room_number
+FROM patients
+JOIN beds 
+ON patients.id = beds.patient_id
+ORDER BY 1;
+
+--Which doctors belong to which departments
+
+SELECT
+    doctors.id,
+    doctors.name_first AS doctor_first_name,
+    doctors.name_last AS doctor_last_name,
+    departments.id,
+    departments.name
+FROM doctors
+JOIN doctors_departments
+ON doctors.id = doctors_departments.doctor_id
+JOIN departments
+ON departments.id = doctors_departments.department_id
+ORDER BY 1;
+
